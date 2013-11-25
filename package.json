@@ -1,0 +1,25 @@
+{
+    "name": "dropbox-datastore-node",
+    "version": "0.1.0",
+    "description": "Node.js wrapper for Dropbox Datastore API",
+    "main": "src/dropbox-datastore-node.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "mocha -w -t 3000"
+    },
+    "dependencies": {
+        "mocha":"*"
+    },
+    "keywords": [
+        "dropbox",
+        "datastore",
+        "api",
+        "storage",
+        "database",
+        "node"
+    ],
+    "author": "Daniele Piccone",
+    "license": "MIT"
+}
