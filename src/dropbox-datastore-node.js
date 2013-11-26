@@ -1,10 +1,24 @@
-
-/*
+/**
  * Dropbox datastore API for Node.js
+ * 
+ * Node.js wrapper for Dropbox datastore API 
+ *
+ * @author Daniele Piccone mail@danielepiccone.com
+ * @version 0.0.1
+ * @license MIT
  */
 
 var https = require('https');
 var querystring = require('querystring');
+
+/**
+ * Build the datastore client
+ *
+ * Usage: 
+ *  var datastore = new DropboxDatastore(options);
+ * 
+ * @param {object} Options an object with all the options
+ */
 
 function DropboxDatastore(options){
     this.app_key = options.app_key;
@@ -23,6 +37,7 @@ function DropboxDatastore(options){
     }
 }
 
+/*
 DropboxDatastore.prototype.authorize = function() {
     console.log('authorizing');
     var self = this;
@@ -34,6 +49,14 @@ DropboxDatastore.prototype.authorize = function() {
         self.callback(res,fn);
     });
 };
+*/
+
+/**
+ * Get the access token for accessing the API
+ *
+ * @param {string} bearer the bearer token received from the oAuth dialog
+ * @param {function} fn the callback to execute with the received data fn(data)
+ */
 
 DropboxDatastore.prototype.getToken = function(bearer,fn) {
     console.log('getting token');
@@ -64,6 +87,12 @@ DropboxDatastore.prototype.getToken = function(bearer,fn) {
     req.end();
 };
 
+/**
+ * Get the information about a Dropbox Account
+ * 
+ * @param {function} fn callback function(data)
+ */
+
 DropboxDatastore.prototype.getInfo = function(fn) {
     console.log('getting info');
     var self = this;
@@ -80,6 +109,12 @@ DropboxDatastore.prototype.getInfo = function(fn) {
     req.end();
 };
 
+/**
+ * List datastores for the current user
+ * 
+ * @param {function} fn callback function(data)
+ */
+
 DropboxDatastore.prototype.listDatastores = function(fn) {
     console.log('listing datastores');
     var self = this;
@@ -95,6 +130,13 @@ DropboxDatastore.prototype.listDatastores = function(fn) {
     });
     req.end();
 };
+
+/**
+ * Create a new datastore
+ * 
+ * @param {string} datastore the name of the datastore
+ * @param {function} fn callback function(data)
+ */
 
 DropboxDatastore.prototype.getCreateDatastore = function(datastore,fn) {
     console.log('creating/getting datastore ' + datastore);
@@ -118,6 +160,13 @@ DropboxDatastore.prototype.getCreateDatastore = function(datastore,fn) {
     req.end();
 };
 
+/**
+ * Retrieve a snapshot of the datastore
+ * 
+ * @param {string} handle_id the handle of the datastore
+ * @param {function} fn callback function(data)
+ */
+
 DropboxDatastore.prototype.retrieveSnapshot = function(h,fn) {
     console.log('creating/getting snapshot of ' + h);
     var self = this;
@@ -139,6 +188,14 @@ DropboxDatastore.prototype.retrieveSnapshot = function(h,fn) {
     req.write(dataString);
     req.end();
 };
+
+/**
+ * Alter the datastore state
+ * 
+ * @param {string} handle_id the name of the datastore
+ * @param {string} change_string the serialized object which describes the change
+ * @param {function} fn callback function(data)
+ */
 
 DropboxDatastore.prototype.putDelta = function(handle_id,change_string,fn) {
     console.log('creating new record');
@@ -164,6 +221,13 @@ DropboxDatastore.prototype.putDelta = function(handle_id,change_string,fn) {
     req.write(dataString);
     req.end();
 };
+
+/**
+ * Delete a datastore
+ * 
+ * @param {string} handle_id the name of the datastore
+ * @param {function} fn callback function(data)
+ */
 
 DropboxDatastore.prototype.deleteDatastore = function(handle_id,fn) {
     console.log('deleting datastore ' + handle_id);
