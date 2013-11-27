@@ -1,23 +1,22 @@
 var assert = require("assert");
+var config = require("./config");
 var DropboxDatastore = require('../src/dropbox-datastore-node');
-global._token = 'y-8E3SDJgGMAAAAAAAAAAdOLY36768xtn9AUbLA1-jtwhEFGv2jHXs2m5X5FgdoI'; // Test token
+
+global._token = config.test_token;
 
 describe('DropboxDatastoreTest', function(){
-    var options = {
-        app_key: 'skt9hjvq37sid0x',
-        app_secret: '5accd160dez5959',
-        response_type: 'code',
-        redirect_uri: 'http://localhost:3000/' // The / is the path and is required
-    };
-
+    var options = config.options 
     var datastore = new DropboxDatastore(options);
     
     it('should take options', function(){
         assert.equal(datastore.app_key, options.app_key);
     });
 
+/*
+ * Get a bearer token first
+ * 
     it('should authorize with token', function(done){
-        datastore.getToken('jrL3ybkwhPcAAAAAAAAAAfq6r3tipgcnO9KXuGIb-BI',function(auth){
+        datastore.getToken(bearer_token,function(auth){
             if (!!datastore._token) {
                 console.log('got token: ' + datastore._token);
                 done();
@@ -26,7 +25,7 @@ describe('DropboxDatastoreTest', function(){
             }
         });
     });
-
+*/
 
     it('should call the info api', function(done){
         datastore._token =  global._token;      
