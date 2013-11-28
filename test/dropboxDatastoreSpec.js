@@ -102,9 +102,10 @@ describe('DropboxDatastoreTest', function(){
     });
     
     it('should get delta', function(done){
-        datastore._token =  global._token;      
-        datastore.getDeltas(global._handlefunction(data) {
-            console.log(data);
+        datastore._token =  global._token;    
+        var rev = 0;  
+        datastore.getDeltas(global._handle,rev,function(data) {
+            //console.log(data);
             if (!!data) {
                // Assing handle to a temporary 
                 done();
@@ -118,7 +119,7 @@ describe('DropboxDatastoreTest', function(){
         datastore._token =  global._token;      
         var changes = '[["I", "tasks", "myrecord", {"taskname": "do laundry", "completed": false}]]';
         datastore.deleteDatastore(global._handle,function(data) {
-            console.log(data);
+            //console.log(data);
             if (!!data.ok) {
                 done();
             } else {
