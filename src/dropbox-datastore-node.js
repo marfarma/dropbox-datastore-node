@@ -244,6 +244,29 @@ DropboxDatastore.prototype.putDelta = function(handle_id,change_string,fn) {
     req.end();
 };
 
+
+/**
+ * Check the datastore ID and return revision and handle
+ * 
+ * @param {function} fn callback function(data)
+ */
+
+DropboxDatastore.prototype.getDeltas = function(handle_id,fn) {
+    console.log('getting deltas');
+    var self = this;
+    var req = https.request({
+        method: 'GET',
+        host: 'api.dropbox.com',
+        path: '/1/datastores/get_deltas?handle='+handle_id,
+        headers: {
+            'Authorization': 'Bearer ' + self._token
+        }
+    },function(res){
+        self.callback(res,fn);
+    });
+    req.end();
+};
+
 /**
  * Delete a datastore
  * 

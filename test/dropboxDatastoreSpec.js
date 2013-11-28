@@ -91,6 +91,19 @@ describe('DropboxDatastoreTest', function(){
         datastore._token =  global._token;      
         var changes = '[["I", "tasks", "myrecord", {"taskname": "do laundry", "completed": false}]]';
         datastore.putDelta(global._handle,changes,function(data) {
+            //console.log(data);
+            if (!!data) {
+               // Assing handle to a temporary 
+                done();
+            } else {
+                throw new Error('No data received');
+            }
+        });
+    });
+    
+    it('should get delta', function(done){
+        datastore._token =  global._token;      
+        datastore.getDeltas(global._handlefunction(data) {
             console.log(data);
             if (!!data) {
                // Assing handle to a temporary 
