@@ -132,6 +132,28 @@ DropboxDatastore.prototype.listDatastores = function(fn) {
 };
 
 /**
+ * Check the datastore ID and return revision and handle
+ * 
+ * @param {function} fn callback function(data)
+ */
+
+DropboxDatastore.prototype.getDatastore = function(dsid,fn) {
+    console.log('getting datastores');
+    var self = this;
+    var req = https.request({
+        method: 'GET',
+        host: 'api.dropbox.com',
+        path: '/1/datastores/get_datastore?dsid='+dsid,
+        headers: {
+            'Authorization': 'Bearer ' + self._token
+        }
+    },function(res){
+        self.callback(res,fn);
+    });
+    req.end();
+};
+
+/**
  * Create a new datastore
  * 
  * @param {string} datastore the name of the datastore

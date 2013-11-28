@@ -51,6 +51,7 @@ describe('DropboxDatastoreTest', function(){
 
     });
 
+    
     it('should create datastore', function(done){
         datastore._token =  global._token;      
         datastore.getCreateDatastore('test',function(data) {
@@ -64,6 +65,17 @@ describe('DropboxDatastoreTest', function(){
         });
     });
 
+    it('should get datastores', function(done){
+        datastore._token =  global._token;      
+        datastore.getDatastore('test',function(data) {
+            if (!!data.handle) {
+                done();
+            } else {
+                throw new Error('No data received');
+            }
+        });
+    });
+    
     it('should retrieve a snapshot', function(done){
         datastore._token =  global._token;      
         datastore.retrieveSnapshot(global._handle,function(data) {
