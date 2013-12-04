@@ -1,6 +1,6 @@
 {
     "name": "dropbox-datastore-node",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Node.js wrapper for Dropbox Datastore API",
     "main": "src/dropbox-datastore-node.js",
     "directories": {
