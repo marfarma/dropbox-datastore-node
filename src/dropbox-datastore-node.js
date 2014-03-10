@@ -219,12 +219,12 @@ DropboxDatastore.prototype.retrieveSnapshot = function(h,fn) {
  * @param {function} fn callback function(data)
  */
 
-DropboxDatastore.prototype.putDelta = function(handle_id,change_string,fn) {
+DropboxDatastore.prototype.putDelta = function(handle_id,rev,change_string,fn) {
     console.log('creating new record');
     var self = this;
     var data = {
         handle: handle_id,
-        rev: 0,
+        rev: rev,
         changes: change_string
     };
     var dataString = querystring.stringify(data);
