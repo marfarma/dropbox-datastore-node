@@ -1,48 +1,59 @@
-#Node.js wrapper for Dropbox Datastore API
+#Dropbox SDK Datastore API for Node
+
+The goal is to be (more or less) api equivalent implementation of the Dropbox SDK Datastore API - duck-typing, without replicating the browser implementation exactly. 
 
 ###Usage
 
 ```
-var DropboxDatastore = require('../src/dropbox-datastore-node');
+var NDD = require('../src/dropbox-datastore-api');
 var options = {
         app_key: '...',
         app_secret: '...',
-        response_type: 'code',
-        redirect_uri: 'http://localhost:3000/' // The / is the path and is required
+        token: '...' 
     };
-var datastore = new DropboxDatastore(options);
+    
+NDD.Datastore(config, function (err, datastore) {
+  if (!err) {
+  
+    // use the datastore api
+    
+  }
+});
+    
 ```
 
-###Methods
+### API - Replicates the Dropbox SDK Datastore API
 
-datastore.getInfo(fn(data));
+  #### Datastore
 
-datastore.listDatastore(fn(data));
+  ##### class methods
+  
+  - datastore.int64(x)
+  - datastore.isInt64(x)
+  - datastore.isValidId(datastoreId)
 
-datastore.getCreateDatastore(NAME,fn(data));
-
-datastore.retrieveSnapshot(HANDLE,fn(data));
-
-datastore.putDelta(HANDLE,CHANGES,fn(data));
-
-datastore.deleteDatastore(HANDLE,fn(data));
-
-###Testing
-
-The test need the config file which contains the app key and secret.
-For easy testing I also included an access token which is used for testing.
-
-```
-exports.options = {
-    app_key: '...',
-    app_secret: '...',
-    response_type: 'code',
-    redirect_uri: 'http://localhost:3000/' // The / is the path and is required
-};
-
-exports.test_token = 'y-8E3SDJgGMAAAAAAAAAAdOLY39769xtn9AUbLA1-jtwhEHGv2jHXs2m5X6FgddI'; // Test token
-```
+  ##### instance methods
+  
+  - datastore.getTable(tableId) 
+  - datastore.listTableIds() 
+  - datastore.close() 
+  - datastore.getId() 
+  - datastore.getSyncStatus() 
+ 
+  ##### TODO: event properties
+  
+  - //recordsChanged (Dropbox.Util.EventSource<Dropbox.Datastore.RecordsChanged>)
+  - //syncStatusChanged (Dropbox.Util.EventSource<?>)
+      
+  ##### properties
+  
+  - datastore.DatastoreManager
+  - datastore.DatastoreInfo
 
 ###TODO
-Implementing all the endpoint of the current API
-Simplyfying the put_delta endpoint to make CRUD operations easier
+
+- DatastoreManager
+- Table
+- Record
+- Long polling for sync
+- return promise

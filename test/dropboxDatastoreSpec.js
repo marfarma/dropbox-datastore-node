@@ -3,7 +3,7 @@ var assert = require("assert"),
     nock = require("nock"),
     DropboxDatastore = require('../src/dropbox-datastore-node');
 
-nock.recorder.rec();
+//nock.recorder.rec();
 global._token = config.test_token;
 
 describe('DropboxDatastoreTest', function(){
