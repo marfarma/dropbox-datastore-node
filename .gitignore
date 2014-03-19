@@ -1,3 +1,4 @@
 test/config.json
 test.out
 node_modules
+.codio
